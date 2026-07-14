@@ -1,0 +1,35 @@
+scene:
+  id: visitor_loitering_demo
+
+regions:
+  visitor_watch_area:
+    polygon: [[0.05, 0.05], [0.95, 0.05], [0.95, 0.95], [0.05, 0.95]]
+
+lines: {}
+
+rules:
+  person_count:
+    enabled: false
+  congestion:
+    enabled: false
+  illegal_parking:
+    enabled: false
+  fire_lane:
+    enabled: false
+  visitor_loitering:
+    enabled: true
+    include_roles: [visitor, unknown]
+    period: day
+    day_start: "06:00"
+    night_start: "18:00"
+    zones:
+      - region: visitor_watch_area
+        day_hold_seconds: 5
+        night_hold_seconds: 3
+        absence_grace_seconds: 1
+        recovery_seconds: 1
+
+analytics:
+  history_seconds: 2
+  stale_track_seconds: 2
+  metrics_interval_seconds: 1

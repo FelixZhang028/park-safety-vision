@@ -1,0 +1,32 @@
+model:
+  path: yolo11n.pt
+  confidence: 0.35
+  iou: 0.50
+  image_size: 640
+  device: auto
+  classes: [0, 2, 3, 5, 7]
+
+tracking:
+  tracker: bytetrack.yaml
+  persist: true
+
+display:
+  show_window: true
+  window_name: Safety Vision Tracking
+  line_width: 2
+
+output:
+  directory: outputs
+  save_video: true
+  save_jsonl: true
+  video_name: tracked.mp4
+  jsonl_name: tracks.jsonl
+  metrics_name: metrics.jsonl
+  events_name: events.jsonl
+  summary_name: summary.json
+  event_images_directory: events
+
+runtime:
+  reconnect_attempts: 3
+  reconnect_delay_seconds: 1.0
+

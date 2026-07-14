@@ -1,0 +1,65 @@
+scene:
+  id: offline_demo
+
+regions:
+  people_area:
+    polygon: [[0.03, 0.08], [0.97, 0.08], [0.97, 0.97], [0.03, 0.97]]
+  congestion_area:
+    polygon: [[0.05, 0.35], [0.95, 0.35], [0.95, 0.97], [0.05, 0.97]]
+  no_parking_area:
+    polygon: [[0.52, 0.45], [0.95, 0.45], [0.95, 0.97], [0.52, 0.97]]
+  fire_lane:
+    polygon: [[0.05, 0.45], [0.48, 0.45], [0.48, 0.97], [0.05, 0.97]]
+  visitor_watch_area:
+    polygon: [[0.15, 0.15], [0.85, 0.15], [0.85, 0.90], [0.15, 0.90]]
+
+lines:
+  entrance:
+    points: [[0.10, 0.60], [0.90, 0.60]]
+    in_direction: negative_to_positive
+    hysteresis: 0.01
+    cooldown_seconds: 1.0
+
+rules:
+  person_count:
+    enabled: true
+    region: people_area
+    lines: [entrance]
+  congestion:
+    enabled: true
+    region: congestion_area
+    min_vehicles: 4
+    max_speed_ratio: 0.01
+    min_low_speed_ratio: 0.70
+    hold_seconds: 10
+    recovery_seconds: 5
+  illegal_parking:
+    enabled: true
+    region: no_parking_area
+    max_speed_ratio: 0.005
+    hold_seconds: 30
+    recovery_seconds: 2
+    suppress_when_congested: true
+  fire_lane:
+    enabled: true
+    region: fire_lane
+    max_speed_ratio: 0.005
+    hold_seconds: 10
+    recovery_seconds: 2
+  visitor_loitering:
+    enabled: true
+    include_roles: [visitor, unknown]
+    period: day
+    day_start: "06:00"
+    night_start: "18:00"
+    zones:
+      - region: visitor_watch_area
+        day_hold_seconds: 30
+        night_hold_seconds: 10
+        absence_grace_seconds: 3
+        recovery_seconds: 2
+
+analytics:
+  history_seconds: 2
+  stale_track_seconds: 2
+  metrics_interval_seconds: 1

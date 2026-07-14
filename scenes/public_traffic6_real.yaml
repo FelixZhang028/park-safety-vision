@@ -1,0 +1,31 @@
+scene:
+  id: zenodo_traffic6_real
+
+regions:
+  congestion_area:
+    polygon: [[0.01, 0.25], [0.99, 0.25], [0.99, 0.99], [0.01, 0.99]]
+
+lines: {}
+
+rules:
+  person_count:
+    enabled: false
+  congestion:
+    enabled: true
+    region: congestion_area
+    min_vehicles: 8
+    max_speed_ratio: 0.03
+    min_low_speed_ratio: 0.50
+    hold_seconds: 2
+    recovery_seconds: 1
+  illegal_parking:
+    enabled: false
+  fire_lane:
+    enabled: false
+  visitor_loitering:
+    enabled: false
+
+analytics:
+  history_seconds: 1
+  stale_track_seconds: 1
+  metrics_interval_seconds: 0.5

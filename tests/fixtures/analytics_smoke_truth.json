@@ -1,0 +1,26 @@
+{
+  "counts": {
+    "entries": 0,
+    "exits": 0
+  },
+  "events": [
+    {
+      "event_type": "traffic_congestion",
+      "region": "traffic",
+      "start": 0.2,
+      "end": 1.1
+    },
+    {
+      "event_type": "fire_lane_occupied",
+      "region": "fire",
+      "start": 0.3,
+      "end": 1.1
+    },
+    {
+      "event_type": "illegal_parking",
+      "region": "parking",
+      "start": 0.4,
+      "end": 1.1
+    }
+  ]
+}

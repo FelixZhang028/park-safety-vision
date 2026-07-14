@@ -1,0 +1,35 @@
+scene:
+  id: aboda_obstruction_demo
+
+regions:
+  fire_lane:
+    polygon: [[0.0, 0.521], [0.633, 0.510], [0.867, 1.0], [0.0, 1.0]]
+
+lines: {}
+
+rules:
+  person_count:
+    enabled: false
+  congestion:
+    enabled: false
+  illegal_parking:
+    enabled: false
+  fire_lane:
+    enabled: false
+  fire_lane_obstruction:
+    enabled: true
+    region: fire_lane
+    baseline_path: ../data/baselines/aboda_video1.jpg
+    pixel_threshold: 28
+    min_area_ratio: 0.002
+    hold_seconds: 3
+    recovery_seconds: 2
+    exclusion_padding_ratio: 0.02
+    max_global_change_ratio: 0.35
+  visitor_loitering:
+    enabled: false
+
+analytics:
+  history_seconds: 2
+  stale_track_seconds: 2
+  metrics_interval_seconds: 1
