@@ -7,10 +7,6 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 
-from src.runtime_env import configure_ultralytics_directory  # noqa: E402
-
-configure_ultralytics_directory()
-
 from src.application import run_tracking  # noqa: E402
 from src.config import AppConfig, ConfigurationError  # noqa: E402
 from src.detector_tracker import DetectionError  # noqa: E402

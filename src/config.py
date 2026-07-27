@@ -13,11 +13,13 @@ class ConfigurationError(ValueError):
 
 @dataclass(slots=True)
 class ModelConfig:
+    backend: str = "ultralytics"
     path: str = "yolo11n.pt"
     confidence: float = 0.35
     iou: float = 0.50
     image_size: int = 640
     device: str = "auto"
+    npu_core: str = "auto"
     classes: tuple[int, ...] = (0, 2, 3, 5, 7)
 
 
@@ -25,6 +27,9 @@ class ModelConfig:
 class TrackingConfig:
     tracker: str = "bytetrack.yaml"
     persist: bool = True
+    track_low_threshold: float = 0.10
+    match_iou_threshold: float = 0.30
+    track_buffer_frames: int = 30
 
 
 @dataclass(slots=True)
@@ -88,10 +93,29 @@ class AppConfig:
 
         _reject_unknown(
             model_raw,
-            {"path", "confidence", "iou", "image_size", "device", "classes"},
+            {
+                "backend",
+                "path",
+                "confidence",
+                "iou",
+                "image_size",
+                "device",
+                "npu_core",
+                "classes",
+            },
             "model",
         )
-        _reject_unknown(tracking_raw, {"tracker", "persist"}, "tracking")
+        _reject_unknown(
+            tracking_raw,
+            {
+                "tracker",
+                "persist",
+                "track_low_threshold",
+                "match_iou_threshold",
+                "track_buffer_frames",
+            },
+            "tracking",
+        )
         _reject_unknown(
             display_raw, {"show_window", "window_name", "line_width"}, "display"
         )
@@ -122,11 +146,13 @@ class AppConfig:
 
         config = cls(
             model=ModelConfig(
+                backend=str(model_raw.get("backend", "ultralytics")),
                 path=_resolve_named_or_relative(model_path, base_dir),
                 confidence=float(model_raw.get("confidence", 0.35)),
                 iou=float(model_raw.get("iou", 0.50)),
                 image_size=int(model_raw.get("image_size", 640)),
                 device=str(model_raw.get("device", "auto")),
+                npu_core=str(model_raw.get("npu_core", "auto")),
                 classes=tuple(
                     int(value) for value in model_raw.get("classes", [0, 2, 3, 5, 7])
                 ),
@@ -134,6 +160,15 @@ class AppConfig:
             tracking=TrackingConfig(
                 tracker=_resolve_named_or_relative(tracker_path, base_dir),
                 persist=bool(tracking_raw.get("persist", True)),
+                track_low_threshold=float(
+                    tracking_raw.get("track_low_threshold", 0.10)
+                ),
+                match_iou_threshold=float(
+                    tracking_raw.get("match_iou_threshold", 0.30)
+                ),
+                track_buffer_frames=int(
+                    tracking_raw.get("track_buffer_frames", 30)
+                ),
             ),
             display=DisplayConfig(
                 show_window=bool(display_raw.get("show_window", True)),
@@ -168,6 +203,11 @@ class AppConfig:
         return config
 
     def validate(self) -> None:
+        self.model.backend = self.model.backend.strip().lower()
+        if self.model.backend not in {"ultralytics", "rknn"}:
+            raise ConfigurationError(
+                "model.backend must be 'ultralytics' or 'rknn'"
+            )
         if not 0.0 <= self.model.confidence <= 1.0:
             raise ConfigurationError("model.confidence must be between 0 and 1")
         if not 0.0 <= self.model.iou <= 1.0:
@@ -179,6 +219,32 @@ class AppConfig:
         if any(class_id < 0 for class_id in self.model.classes):
             raise ConfigurationError(
                 "model.classes must contain non-negative class IDs"
+            )
+        if self.model.backend == "rknn" and self.model.npu_core.strip().lower() not in {
+            "auto",
+            "0",
+            "1",
+            "2",
+            "all",
+        }:
+            raise ConfigurationError(
+                "model.npu_core must be auto, 0, 1, 2, or all"
+            )
+        if not 0.0 <= self.tracking.track_low_threshold <= 1.0:
+            raise ConfigurationError(
+                "tracking.track_low_threshold must be between 0 and 1"
+            )
+        if self.tracking.track_low_threshold > self.model.confidence:
+            raise ConfigurationError(
+                "tracking.track_low_threshold cannot exceed model.confidence"
+            )
+        if not 0.0 <= self.tracking.match_iou_threshold <= 1.0:
+            raise ConfigurationError(
+                "tracking.match_iou_threshold must be between 0 and 1"
+            )
+        if self.tracking.track_buffer_frames < 0:
+            raise ConfigurationError(
+                "tracking.track_buffer_frames cannot be negative"
             )
         if self.display.line_width <= 0:
             raise ConfigurationError("display.line_width must be greater than zero")

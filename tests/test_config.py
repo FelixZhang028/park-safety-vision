@@ -38,6 +38,14 @@ class AppConfigTests(unittest.TestCase):
             )
             self.assertEqual(config.output.directory, root / "results")
 
+    def test_rk3588_config_loads(self) -> None:
+        config = AppConfig.from_yaml(PROJECT_ROOT / "config.rk3588.yaml")
+
+        self.assertEqual(config.model.backend, "rknn")
+        self.assertEqual(config.model.npu_core, "auto")
+        self.assertTrue(config.model.path.endswith("models\\yolo11n_fp16.rknn"))
+        self.assertFalse(config.display.show_window)
+
     def test_unknown_key_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             config_path = Path(temporary_directory) / "invalid.yaml"

@@ -31,7 +31,7 @@ class FakeModel:
     def __init__(self) -> None:
         self.last_kwargs = None
 
-    def track(self, **kwargs):
+    def predict(self, **kwargs):
         self.last_kwargs = kwargs
         return [FakeResult()]
 
@@ -47,22 +47,24 @@ class DetectorTrackerTests(unittest.TestCase):
         self.assertEqual(tracks[0].frame_id, 12)
         self.assertEqual(tracks[0].timestamp, 0.4)
 
-    def test_ultralytics_builtin_tracking_arguments_are_used(self) -> None:
+    def test_detection_and_shared_tracking_arguments_are_used(self) -> None:
         fake_model = FakeModel()
         detector = DetectorTracker(
             ModelConfig(device="cpu"),
-            TrackingConfig(tracker="bytetrack.yaml", persist=True),
+            TrackingConfig(persist=True),
             model_factory=lambda _: fake_model,
         )
         frame = np.zeros((64, 64, 3), dtype=np.uint8)
 
-        tracks = detector.track(frame, frame_id=3, timestamp=0.1)
+        first = detector.track(frame, frame_id=3, timestamp=0.1)
+        second = detector.track(frame, frame_id=4, timestamp=0.2)
 
-        self.assertEqual(len(tracks), 2)
-        self.assertEqual(fake_model.last_kwargs["tracker"], "bytetrack.yaml")
-        self.assertTrue(fake_model.last_kwargs["persist"])
+        self.assertEqual([track.track_id for track in first], [1, 2])
+        self.assertEqual([track.track_id for track in second], [1, 2])
         self.assertEqual(fake_model.last_kwargs["classes"], [0, 2, 3, 5, 7])
+        self.assertEqual(fake_model.last_kwargs["conf"], 0.10)
         self.assertEqual(fake_model.last_kwargs["device"], "cpu")
+        detector.close()
 
 
 if __name__ == "__main__":

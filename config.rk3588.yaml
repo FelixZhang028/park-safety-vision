@@ -1,22 +1,22 @@
 model:
-  backend: ultralytics
-  path: yolo11n.pt
+  backend: rknn
+  path: models/yolo11n_fp16.rknn
   confidence: 0.35
   iou: 0.50
   image_size: 640
-  device: auto
+  device: cpu
   npu_core: auto
   classes: [0, 2, 3, 5, 7]
 
 tracking:
-  tracker: bytetrack.yaml
+  tracker: bytetrack
   persist: true
   track_low_threshold: 0.10
   match_iou_threshold: 0.30
   track_buffer_frames: 30
 
 display:
-  show_window: true
+  show_window: false
   window_name: Safety Vision Tracking
   line_width: 2
 
@@ -32,6 +32,5 @@ output:
   event_images_directory: events
 
 runtime:
-  reconnect_attempts: 3
-  reconnect_delay_seconds: 1.0
-
+  reconnect_attempts: 10
+  reconnect_delay_seconds: 2.0

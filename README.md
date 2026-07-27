@@ -202,3 +202,96 @@ python main.py --source data\public\opencv_vtest.avi --scene scenes\visitor_loit
 遮挡超过容忍时间、目标长时间离开画面以及没有稳定身份时的 Track ID 切换仍可能重置
 停留计时。所有规则阈值和区域必须使用目标园区录像标定后再用于验收。
 
+## 电脑与 RK3588 双后端
+
+项目只维护一套规则代码。电脑端由 `config.yaml` 选择
+`ultralytics + yolo11n.pt`，RK3588 由 `config.rk3588.yaml` 选择
+`RKNNLite + yolo11n_fp16.rknn`。两种后端都先生成统一检测结果，再由共享的
+两阶段跟踪器生成 `TrackResult`，因此人数、拥堵、违停、消防通道占用、杂物和
+异常停留规则不区分运行设备。
+
+电脑端安装和运行：
+
+```powershell
+python -m pip install -r requirements.txt
+python main.py --config config.yaml --source data\public\opencv_vtest.avi --scene scenes\public_vtest_real.yaml --no-show
+```
+
+RKNN实现位于 `src/inference/rknn_detector.py`，输入是已经在板上验证过的
+`(1, 640, 640, 3) uint8`，输出按 `(1, 84, 8400)` 解码，并完成类别过滤、
+置信度过滤、逐类别 NMS 和 letterbox 坐标还原。
+
+## 生成 RK3588 部署包
+
+默认使用已经导出的 FP16 模型：
+
+```powershell
+python tools\build_rk3588_bundle.py --version 0.1.0
+```
+
+生成文件：
+
+```text
+dist/park-safety-rk3588-0.1.0.tar.gz
+```
+
+部署包只包含运行代码、场景配置、RKNN模型和启动脚本，不包含 `.git`、
+PyTorch、Ultralytics、公开测试视频、历史输出、PPT或测试代码。指定其他模型时：
+
+```powershell
+python tools\build_rk3588_bundle.py --model D:\path\model.rknn --version 0.1.1
+```
+
+## 在 RK3588 上测试
+
+先把部署包和测试视频传到板子：
+
+```powershell
+scp dist\park-safety-rk3588-0.1.0.tar.gz root@板子IP:/root/
+scp data\public\opencv_vtest.avi root@板子IP:/root/
+```
+
+登录板子后解压并检查环境：
+
+```bash
+cd /root
+tar -xzf park-safety-rk3588-0.1.0.tar.gz
+cd park-safety-rk3588-0.1.0
+
+python3 -c "import cv2, numpy, yaml; from rknnlite.api import RKNNLite; print('runtime OK')"
+```
+
+如果缺少 OpenCV、NumPy 或 PyYAML，可联网安装
+`python3 -m pip install -r requirements.txt`；`rknn-toolkit-lite2` 使用板子中
+已经安装的 2.3.2 版本，不要用电脑端依赖覆盖。
+
+先验证一帧检测结果：
+
+```bash
+python3 tools/rknn_smoke_test.py \
+  --model models/yolo11n_fp16.rknn \
+  --source /root/opencv_vtest.avi \
+  --output outputs/rknn-smoke.jpg
+```
+
+再运行完整视频和业务规则：
+
+```bash
+./start.sh /root/opencv_vtest.avi scenes/public_vtest_real.yaml
+```
+
+结果位于 `outputs/`，重点检查 `tracked.mp4`、`events.jsonl`、
+`metrics.jsonl`、`summary.json` 和 `events/*.jpg`。
+
+长期运行时执行：
+
+```bash
+sudo ./install.sh
+sudo nano /etc/park-safety/park-safety.env
+sudo systemctl start park-safety
+sudo journalctl -u park-safety -f
+```
+
+在 `park-safety.env` 中配置 `VIDEO_SOURCE` 和实际的 `SCENE_CONFIG`。
+没有摄像头时使用板上的视频路径；以后接摄像头只需要将 `VIDEO_SOURCE` 改为
+摄像头编号或 RTSP 地址，不需要修改算法代码。

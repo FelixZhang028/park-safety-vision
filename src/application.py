@@ -159,6 +159,7 @@ def run_tracking(
         if total_frames == 0:
             raise SourceError(f"No frames could be read from source: {source}")
     finally:
+        detector.close()
         if config.display.show_window:
             try:
                 cv2.destroyAllWindows()

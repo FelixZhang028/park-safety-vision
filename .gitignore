@@ -1,18 +1,51 @@
+# Python caches and local environments
 __pycache__/
 *.py[cod]
 *.log
+*.tmp
+*.bak
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
 .coverage
+.tox/
+.nox/
 .venv/
 venv/
+
+# Local settings and operating-system files
+.env
+.env.*
+!.env.example
 .idea/
 .vscode/
+.DS_Store
+Thumbs.db
+
+# Local AI assistant files
+CLAUDE.md
+.claude/
+.claude-*.md
+.agents/
+.codex/
+.tasks/
+
+# Model binaries and conversion artifacts
 .ultralytics/
 *.pt
+*.onnx
+*.engine
+*.torchscript
+*.tflite
+*.rknn
 
+# Videos, generated results, and deployment packages
+*.mp4
+*.avi
+*.mkv
+*.mov
 outputs/*
 !outputs/.gitkeep
 data/*
 !data/.gitkeep
-
+dist/

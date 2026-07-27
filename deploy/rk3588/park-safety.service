@@ -1,0 +1,16 @@
+[Unit]
+Description=Park Safety Vision Analytics
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/park-safety/current
+EnvironmentFile=-/etc/park-safety/park-safety.env
+ExecStart=/opt/park-safety/current/start.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
