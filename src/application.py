@@ -55,7 +55,14 @@ def run_tracking(
     summary_path = (
         config.output.directory / config.output.summary_name if scene else None
     )
-    visualizer = Visualizer(config.display.line_width)
+    visualizer = Visualizer(
+        line_width=config.display.line_width,
+        presentation_mode=config.display.presentation_mode,
+        show_fps=config.display.show_fps,
+        show_track_labels=config.display.show_track_labels,
+        output_width=config.display.output_width,
+        output_height=config.display.output_height,
+    )
     video_path, jsonl_path = output_paths(config.output)
     total_frames = 0
     smoothed_fps = 0.0

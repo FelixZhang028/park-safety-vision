@@ -1,0 +1,25 @@
+scene:
+  id: demo_public_area_clutter
+  name: 公共区域堆物监测
+  location: 公共通道
+
+regions:
+  object_area:
+    polygon: [[0.25, 0.49], [0.48, 0.49], [0.48, 0.68], [0.25, 0.68]]
+
+rules:
+  fire_lane_obstruction:
+    enabled: true
+    region: object_area
+    baseline_path: ../../dataset/03_public_area_clutter/baseline_clean.jpg
+    pixel_threshold: 24
+    min_area_ratio: 0.01
+    hold_seconds: 3
+    recovery_seconds: 1
+    exclusion_padding_ratio: 0.01
+    max_global_change_ratio: 0.50
+
+analytics:
+  history_seconds: 2
+  stale_track_seconds: 2
+  metrics_interval_seconds: 1

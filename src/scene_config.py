@@ -104,6 +104,8 @@ class SceneConfig:
     scene_id: str
     regions: dict[str, RegionConfig]
     lines: dict[str, CountingLineConfig]
+    display_name: str = ""
+    location: str = ""
     person_count: PersonCountRuleConfig = field(default_factory=PersonCountRuleConfig)
     congestion: CongestionRuleConfig = field(default_factory=CongestionRuleConfig)
     illegal_parking: IllegalParkingRuleConfig = field(
@@ -148,7 +150,7 @@ class SceneConfig:
         rules_raw = _mapping(raw.get("rules", {}), "rules")
         analytics_raw = _mapping(raw.get("analytics", {}), "analytics")
 
-        _reject_unknown(scene_raw, {"id"}, "scene")
+        _reject_unknown(scene_raw, {"id", "name", "location"}, "scene")
         _reject_unknown(
             rules_raw,
             {
@@ -179,6 +181,8 @@ class SceneConfig:
             scene_id=str(scene_raw.get("id", "scene")),
             regions=regions,
             lines=lines,
+            display_name=str(scene_raw.get("name", "")).strip(),
+            location=str(scene_raw.get("location", "")).strip(),
             person_count=_parse_person_count(rules_raw.get("person_count", {})),
             congestion=_parse_congestion(rules_raw.get("congestion", {})),
             illegal_parking=_parse_illegal_parking(

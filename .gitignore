@@ -48,4 +48,5 @@ outputs/*
 !outputs/.gitkeep
 data/*
 !data/.gitkeep
+dataset/
 dist/

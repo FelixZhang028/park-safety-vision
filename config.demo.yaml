@@ -1,0 +1,41 @@
+model:
+  backend: ultralytics
+  path: yolo11n.pt
+  confidence: 0.20
+  iou: 0.50
+  image_size: 640
+  device: auto
+  npu_core: auto
+  classes: [0, 2, 3, 5, 7]
+
+tracking:
+  tracker: bytetrack.yaml
+  persist: true
+  track_low_threshold: 0.10
+  match_iou_threshold: 0.30
+  track_buffer_frames: 30
+
+display:
+  show_window: false
+  window_name: Park Safety Leadership Demo
+  line_width: 2
+  presentation_mode: true
+  show_fps: false
+  show_track_labels: false
+  output_width: 1280
+  output_height: 720
+
+output:
+  directory: outputs/leadership-demo
+  save_video: true
+  save_jsonl: false
+  video_name: result.mp4
+  jsonl_name: tracks.jsonl
+  metrics_name: metrics.jsonl
+  events_name: events.jsonl
+  summary_name: summary.json
+  event_images_directory: events
+
+runtime:
+  reconnect_attempts: 0
+  reconnect_delay_seconds: 0

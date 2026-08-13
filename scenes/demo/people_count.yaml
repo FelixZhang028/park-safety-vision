@@ -1,0 +1,26 @@
+scene:
+  id: demo_people_count
+  name: 人员进出统计
+  location: 园区步行通道
+
+regions:
+  people_area:
+    polygon: [[0.18, 0.35], [0.98, 0.35], [0.98, 1.00], [0.18, 1.00]]
+
+lines:
+  entrance:
+    points: [[0.18, 0.75], [0.98, 0.75]]
+    in_direction: negative_to_positive
+    hysteresis: 0.01
+    cooldown_seconds: 1.0
+
+rules:
+  person_count:
+    enabled: true
+    region: people_area
+    lines: [entrance]
+
+analytics:
+  history_seconds: 2
+  stale_track_seconds: 2
+  metrics_interval_seconds: 1

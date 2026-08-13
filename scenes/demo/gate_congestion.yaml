@@ -1,0 +1,23 @@
+scene:
+  id: demo_gate_congestion
+  name: 出入口拥堵监测
+  location: 园区主要出入口
+
+regions:
+  congestion_area:
+    polygon: [[0.02, 0.08], [0.98, 0.08], [0.98, 0.98], [0.02, 0.98]]
+
+rules:
+  congestion:
+    enabled: true
+    region: congestion_area
+    min_vehicles: 20
+    max_speed_ratio: 0.06
+    min_low_speed_ratio: 0.70
+    hold_seconds: 2
+    recovery_seconds: 1
+
+analytics:
+  history_seconds: 2
+  stale_track_seconds: 2
+  metrics_interval_seconds: 1

@@ -1,0 +1,69 @@
+{"kind":"deck","id":"pr/05ajbl","name":"Deck"}
+{"kind":"layout","layoutId":"d76f8f66-a980-4646-8e06-bab598f650f0","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"867a5f3e-06a7-4f17-a8cb-64c407989b04","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/rww0ju","slide":1,"title":"人员进出统计","textShapes":10}
+{"kind":"shape","id":"sh/h8jyhszq","slide":1,"bbox":[0,40,12,72]}
+{"kind":"textbox","id":"sh/u5sfmd0z","slide":1,"text":"人员进出统计","textPreview":"人员进出统计","textChars":6,"textLines":1,"bbox":[48,37,590,49]}
+{"kind":"textbox","id":"sh/v61gfihk","slide":1,"text":"People Flow Analytics","textPreview":"People Flow Analytics","textChars":21,"textLines":1,"bbox":[50,88,530,26]}
+{"kind":"textbox","id":"sh/4buhs7ih","slide":1,"text":"01 / 03","textPreview":"01 / 03","textChars":7,"textLines":1,"bbox":[1155,49,76,23]}
+{"kind":"shape","id":"sh/5c3ylcz2","slide":1,"bbox":[48,143,704,400]}
+{"kind":"textbox","id":"sh/3algj2hw","slide":1,"text":"演示视频  ·  17 秒  ·  H.264","textPreview":"演示视频  ·  17 秒  ·  H.264","textChars":23,"textLines":1,"bbox":[50,556,320,26]}
+{"kind":"shape","id":"sh/szuhw7id","slide":1,"bbox":[789,143,2,439]}
+{"kind":"textbox","id":"sh/d03ypczy","slide":1,"text":"算法介绍","textPreview":"算法介绍","textChars":4,"textLines":1,"bbox":[824,137,300,40]}
+{"kind":"shape","id":"sh/54bmtg7q","slide":1,"bbox":[824,183,405,2]}
+{"kind":"shape","id":"sh/k325kbql","slide":1,"bbox":[824,213,10,10]}
+{"kind":"textbox","id":"sh/j2t4rqp0","slide":1,"text":"识别对象：  对监测区域内人员进行实时检测，并为每个人保持稳定的跟踪编号。","textPreview":"识别对象：  对监测区域内人员进行实时检测，并为每个人保持稳定的跟踪编号。","textChars":37,"textLines":1,"bbox":[844,203,386,76]}
+{"kind":"shape","id":"sh/i1knil8f","slide":1,"bbox":[824,306,10,10]}
+{"kind":"textbox","id":"sh/t8vmx072","slide":1,"text":"判断逻辑：  人员轨迹穿越白色虚拟计数线时，根据运动方向分别累计进入和离开。","textPreview":"判断逻辑：  人员轨迹穿越白色虚拟计数线时，根据运动方向分别累计进入和离开。","textChars":38,"textLines":1,"bbox":[844,296,386,76]}
+{"kind":"shape","id":"sh/s7m5ovqh","slide":1,"bbox":[824,399,10,10]}
+{"kind":"textbox","id":"sh/76d4vqpw","slide":1,"text":"设置规则：  可配置绿色监测区域、计数线位置、进出方向和重复计数间隔。","textPreview":"设置规则：  可配置绿色监测区域、计数线位置、进出方向和重复计数间隔。","textChars":35,"textLines":1,"bbox":[844,389,386,76]}
+{"kind":"shape","id":"sh/654nml8b","slide":1,"bbox":[824,492,10,10]}
+{"kind":"textbox","id":"sh/9crmlw7y","slide":1,"text":"输出结果：  实时显示当前、进入和离开人数，并形成分时段统计记录。","textPreview":"输出结果：  实时显示当前、进入和离开人数，并形成分时段统计记录。","textChars":33,"textLines":1,"bbox":[844,482,386,76]}
+{"kind":"shape","id":"sh/8bilcrqd","slide":1,"bbox":[824,594,405,1]}
+{"kind":"textbox","id":"sh/0vm58by9","slide":1,"text":"演示阈值可根据现场视角与管理规则调整","textPreview":"演示阈值可根据现场视角与管理规则调整","textChars":18,"textLines":1,"bbox":[824,606,405,28]}
+{"kind":"image","id":"im/zy1s3itw","slide":1,"name":"","alt":"人员进出统计演示视频","bbox":[50,145,700,394]}
+{"kind":"notes","id":"nt/rww0ju","slide":1,"text":"[Sources]\n- 本地项目生成的演示视频：D:/zyf/园区安消/outputs/leadership-demo/ppt/01_people_count_h264.mp4\n- 算法说明基于本地实现：undefined\n[/Sources]"}
+{"kind":"slide","id":"sl/mlffgg","slide":2,"title":"出入口拥堵预警","textShapes":10}
+{"kind":"shape","id":"sh/ra14zapc","slide":2,"bbox":[0,40,12,72]}
+{"kind":"textbox","id":"sh/cbalsfqh","slide":2,"text":"出入口拥堵预警","textPreview":"出入口拥堵预警","textChars":7,"textLines":1,"bbox":[48,37,590,49]}
+{"kind":"textbox","id":"sh/dcjm1k72","slide":2,"text":"Gate Congestion Alert","textPreview":"Gate Congestion Alert","textChars":21,"textLines":1,"bbox":[50,88,530,26]}
+{"kind":"textbox","id":"sh/eds3up8n","slide":2,"text":"02 / 03","textPreview":"02 / 03","textChars":7,"textLines":1,"bbox":[1155,49,76,23]}
+{"kind":"shape","id":"sh/zyl43up8","slide":2,"bbox":[48,143,704,400]}
+{"kind":"textbox","id":"sh/103m547e","slide":2,"text":"演示视频  ·  12 秒  ·  H.264","textPreview":"演示视频  ·  12 秒  ·  H.264","textChars":23,"textLines":1,"bbox":[50,556,320,26]}
+{"kind":"shape","id":"sh/uh83il8j","slide":2,"bbox":[789,143,2,439]}
+{"kind":"textbox","id":"sh/fih4rqp4","slide":2,"text":"算法介绍","textPreview":"算法介绍","textChars":4,"textLines":1,"bbox":[824,137,300,40]}
+{"kind":"shape","id":"sh/fit8jed8","slide":2,"bbox":[824,183,405,2]}
+{"kind":"shape","id":"sh/ehk7qtwn","slide":2,"bbox":[824,213,10,10]}
+{"kind":"textbox","id":"sh/14bqlove","slide":2,"text":"识别对象：  识别区域内汽车、摩托车、公交车和货车，并持续跟踪车辆状态。","textPreview":"识别对象：  识别区域内汽车、摩托车、公交车和货车，并持续跟踪车辆状态。","textChars":36,"textLines":1,"bbox":[844,203,386,76]}
+{"kind":"shape","id":"sh/032psjet","slide":2,"bbox":[824,306,10,10]}
+{"kind":"textbox","id":"sh/re98fedw","slide":2,"text":"判断逻辑：  综合车辆数量、运动速度和低速车辆占比，判断是否出现持续拥堵。","textPreview":"判断逻辑：  综合车辆数量、运动速度和低速车辆占比，判断是否出现持续拥堵。","textChars":37,"textLines":1,"bbox":[844,296,386,76]}
+{"kind":"shape","id":"sh/6d07m9wr","slide":2,"bbox":[824,399,10,10]}
+{"kind":"textbox","id":"sh/dgbqhov2","slide":2,"text":"演示规则：  车辆不少于 20 辆、低速占比达到 70%，持续 2 秒后触发预警。","textPreview":"演示规则：  车辆不少于 20 辆、低速占比达到 70%，持续 2 秒后触发预警。","textChars":41,"textLines":1,"bbox":[844,389,386,76]}
+{"kind":"shape","id":"sh/sf2pojeh","slide":2,"bbox":[824,492,10,10]}
+{"kind":"textbox","id":"sh/ja9obux0","slide":2,"text":"输出结果：  区域自动标红，并保存报警时间、现场截图和车辆指标。","textPreview":"输出结果：  区域自动标红，并保存报警时间、现场截图和车辆指标。","textChars":32,"textLines":1,"bbox":[844,482,386,76]}
+{"kind":"shape","id":"sh/i907ipwf","slide":2,"bbox":[824,594,405,1]}
+{"kind":"textbox","id":"sh/m5grupg7","slide":2,"text":"演示阈值可根据现场视角与管理规则调整","textPreview":"演示阈值可根据现场视角与管理规则调整","textChars":18,"textLines":1,"bbox":[824,606,405,28]}
+{"kind":"image","id":"im/907ix0v2","slide":2,"name":"","alt":"出入口拥堵预警演示视频","bbox":[50,145,700,394]}
+{"kind":"notes","id":"nt/mlffgg","slide":2,"text":"[Sources]\n- 本地项目生成的演示视频：D:/zyf/园区安消/outputs/leadership-demo/ppt/02_gate_congestion_h264.mp4\n- 算法说明基于本地实现：undefined\n[/Sources]"}
+{"kind":"slide","id":"sl/vsvmrq","slide":3,"title":"公共区域堆物预警","textShapes":10}
+{"kind":"shape","id":"sh/7ato3ep4","slide":3,"bbox":[0,40,12,72]}
+{"kind":"textbox","id":"sh/8b25cz6p","slide":3,"text":"公共区域堆物预警","textPreview":"公共区域堆物预警","textChars":8,"textLines":1,"bbox":[48,37,590,49]}
+{"kind":"textbox","id":"sh/9cb6547a","slide":3,"text":"Public Area Obstruction Alert","textPreview":"Public Area Obstruction Alert","textChars":29,"textLines":1,"bbox":[50,88,530,26]}
+{"kind":"textbox","id":"sh/udkne9ov","slide":3,"text":"03 / 03","textPreview":"03 / 03","textChars":7,"textLines":1,"bbox":[1155,49,76,23]}
+{"kind":"shape","id":"sh/veto7ep0","slide":3,"bbox":[48,143,704,400]}
+{"kind":"textbox","id":"sh/hgv69o76","slide":3,"text":"演示视频  ·  14.5 秒  ·  H.264","textPreview":"演示视频  ·  14.5 秒  ·  H.264","textChars":25,"textLines":1,"bbox":[50,556,320,26]}
+{"kind":"shape","id":"sh/ih4nitor","slide":3,"bbox":[789,143,2,439]}
+{"kind":"textbox","id":"sh/jidobypc","slide":3,"text":"算法介绍","textPreview":"算法介绍","textChars":4,"textLines":1,"bbox":[824,137,300,40]}
+{"kind":"shape","id":"sh/nq90nuto","slide":3,"bbox":[824,183,405,2]}
+{"kind":"shape","id":"sh/mpgzups3","slide":3,"bbox":[824,213,10,10]}
+{"kind":"textbox","id":"sh/9srip4bu","slide":3,"text":"识别对象：  发现公共通道等指定区域内新增并持续存在的未知物品。","textPreview":"识别对象：  发现公共通道等指定区域内新增并持续存在的未知物品。","textChars":32,"textLines":1,"bbox":[844,203,386,76]}
+{"kind":"shape","id":"sh/8rihwza9","slide":3,"bbox":[824,306,10,10]}
+{"kind":"textbox","id":"sh/z2p0jats","slide":3,"text":"判断逻辑：  将实时画面与无杂物基准图比对，提取持续变化区域。","textPreview":"判断逻辑：  将实时画面与无杂物基准图比对，提取持续变化区域。","textChars":31,"textLines":1,"bbox":[844,296,386,76]}
+{"kind":"shape","id":"sh/y1gzqps7","slide":3,"bbox":[824,399,10,10]}
+{"kind":"textbox","id":"sh/l47ilkbi","slide":3,"text":"抑制误报：  排除经过的人员和车辆，并通过面积及持续时间过滤瞬时变化。","textPreview":"抑制误报：  排除经过的人员和车辆，并通过面积及持续时间过滤瞬时变化。","textChars":35,"textLines":1,"bbox":[844,389,386,76]}
+{"kind":"shape","id":"sh/03yhsfax","slide":3,"bbox":[824,492,10,10]}
+{"kind":"textbox","id":"sh/jyt0vetw","slide":3,"text":"输出结果：  自动框选堆物位置，显示变化面积并保存报警事件与截图。","textPreview":"输出结果：  自动框选堆物位置，显示变化面积并保存报警事件与截图。","textChars":33,"textLines":1,"bbox":[844,482,386,76]}
+{"kind":"shape","id":"sh/ix0z29sb","slide":3,"bbox":[824,594,405,1]}
+{"kind":"textbox","id":"sh/e5obahgv","slide":3,"text":"演示阈值可根据现场视角与管理规则调整","textPreview":"演示阈值可根据现场视角与管理规则调整","textChars":18,"textLines":1,"bbox":[824,606,405,28]}
+{"kind":"image","id":"im/9cfyt87u","slide":3,"name":"","alt":"公共区域堆物预警演示视频","bbox":[50,145,700,394]}
+{"kind":"notes","id":"nt/vsvmrq","slide":3,"text":"[Sources]\n- 本地项目生成的演示视频：D:/zyf/园区安消/outputs/leadership-demo/ppt/03_public_area_clutter_h264.mp4\n- 算法说明基于本地实现：undefined\n[/Sources]"}

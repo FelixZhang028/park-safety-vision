@@ -46,6 +46,15 @@ class AppConfigTests(unittest.TestCase):
         self.assertTrue(config.model.path.endswith("models\\yolo11n_fp16.rknn"))
         self.assertFalse(config.display.show_window)
 
+    def test_demo_config_enables_clean_presentation_output(self) -> None:
+        config = AppConfig.from_yaml(PROJECT_ROOT / "config.demo.yaml")
+
+        self.assertTrue(config.display.presentation_mode)
+        self.assertFalse(config.display.show_track_labels)
+        self.assertFalse(config.display.show_fps)
+        self.assertEqual(config.display.output_width, 1280)
+        self.assertEqual(config.display.output_height, 720)
+
     def test_unknown_key_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             config_path = Path(temporary_directory) / "invalid.yaml"

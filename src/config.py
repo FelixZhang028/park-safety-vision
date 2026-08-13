@@ -37,6 +37,11 @@ class DisplayConfig:
     show_window: bool = True
     window_name: str = "Safety Vision Tracking"
     line_width: int = 2
+    presentation_mode: bool = False
+    show_fps: bool = True
+    show_track_labels: bool = True
+    output_width: int = 0
+    output_height: int = 0
 
 
 @dataclass(slots=True)
@@ -117,7 +122,18 @@ class AppConfig:
             "tracking",
         )
         _reject_unknown(
-            display_raw, {"show_window", "window_name", "line_width"}, "display"
+            display_raw,
+            {
+                "show_window",
+                "window_name",
+                "line_width",
+                "presentation_mode",
+                "show_fps",
+                "show_track_labels",
+                "output_width",
+                "output_height",
+            },
+            "display",
         )
         _reject_unknown(
             output_raw,
@@ -176,6 +192,15 @@ class AppConfig:
                     display_raw.get("window_name", "Safety Vision Tracking")
                 ),
                 line_width=int(display_raw.get("line_width", 2)),
+                presentation_mode=bool(
+                    display_raw.get("presentation_mode", False)
+                ),
+                show_fps=bool(display_raw.get("show_fps", True)),
+                show_track_labels=bool(
+                    display_raw.get("show_track_labels", True)
+                ),
+                output_width=int(display_raw.get("output_width", 0)),
+                output_height=int(display_raw.get("output_height", 0)),
             ),
             output=OutputConfig(
                 directory=_resolve_directory(
@@ -248,6 +273,10 @@ class AppConfig:
             )
         if self.display.line_width <= 0:
             raise ConfigurationError("display.line_width must be greater than zero")
+        if self.display.output_width < 0:
+            raise ConfigurationError("display.output_width cannot be negative")
+        if self.display.output_height < 0:
+            raise ConfigurationError("display.output_height cannot be negative")
         if self.runtime.reconnect_attempts < 0:
             raise ConfigurationError("runtime.reconnect_attempts cannot be negative")
         if self.runtime.reconnect_delay_seconds < 0:
